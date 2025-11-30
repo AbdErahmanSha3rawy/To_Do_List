@@ -45,13 +45,25 @@ function counter() {
     if (total === 0) {
         discription.textContent = '';
     } else {
+        if(completed===1 && total===1){
+        discription.textContent = `${completed} task complited from ${total} task`;
+ 
+        }
+        else if(completed===1 && total>1){
+        discription.textContent = `${completed} task complited from ${total} tasks`;
+        }
+        else if(completed!=1 && total===1){
+        discription.textContent = `${completed} tasks complited from ${total} task`;
+        }
+        else{
         discription.textContent = `${completed} tasks complited from ${total} tasks`;
+        }
     }
 }
 add.onclick=function(){
 
     
-if(Write.value !='' &&Write.value.length<=50 && mode!='update' && mode!='update_complited'){
+if(Write.value !='' &&Write.value.length<=35 && mode!='update' && mode!='update_complited'){
 counter_task+=1;
 
 arr.push(Write.value);   
@@ -62,7 +74,7 @@ display();
 Write.value='';
 
 }
-else if(mode==='update'){
+else if(mode==='update' && Write.value.length<=35 ){
 arr[x]=Write.value;
 
 localStorage.setItem('taskad',JSON.stringify(arr));
@@ -70,7 +82,7 @@ display();
 Write.value='';
 
 }
-else if(mode==='update_complited'){
+else if(mode==='update_complited' && Write.value.length<=35 ){
 new_arr[x]=Write.value;
 counter();
 
@@ -79,8 +91,8 @@ display2();
 Write.value='';
 
 }
-else if(Write.value.length>50){
-    alert('count of litters must be less than 50 ');
+else if(Write.value.length>35){
+    alert('count of litters must be less than 35 ');
 }
 };
  function display(){
@@ -112,7 +124,6 @@ function updateitem(i){
 update_item.onclick=function(){
    updateitem();
 
-
 }
 function update_complited(i){
     Write.value=new_arr[i];
@@ -122,7 +133,6 @@ function update_complited(i){
 }
 update_complited.onclick=function(){
    update_complited();
-
 }
 delet.onclick=function(){
 
@@ -156,7 +166,8 @@ counter();
     for (let i = 0; i < new_arr.length; i++) {
         table2 += `        
             <tr>
-            <td class="text">${new_arr[i]}</td>
+   
+            <td class="text" style="text-decoration:line-through" >${new_arr[i]}</td>
             <td><button onclick = "ok_complited(${i}) " class="ok_complited">⬆</button></td>
             <td><button onclick = "update_complited(${i}) " class="update_complited">🖊</button></td>
             <td><button onclick = "deletec(${i}) " class="delete_complited">✖</button></td>
@@ -212,6 +223,7 @@ deleteitem();
 };
 
 function searchData(value){
+
      table = '';
 for (let i = 0; i < arr.length; i++) {
 
@@ -229,5 +241,23 @@ for (let i = 0; i < arr.length; i++) {
 
 }
     document.getElementById('tbody').innerHTML=table;
+}
+function searchDatacomplited(value){
 
+table2 ='';
+
+    for (let x = 0; x < new_arr.length; x++) {
+        if(new_arr[x].includes(value)){
+        table2 += `        
+            <tr>
+            <td class="text">${new_arr[x]}</td>
+            <td><button onclick = "ok_complited(${x}) " class="ok_complited">⬆</button></td>
+            <td><button onclick = "update_complited(${x}) " class="update_complited">🖊</button></td>
+            <td><button onclick = "deletec(${x}) " class="delete_complited">✖</button></td>
+        </tr> 
+        
+        `      
+    }
+}
+    document.getElementById('tbody2').innerHTML=table2;
 }
