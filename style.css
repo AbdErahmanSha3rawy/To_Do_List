@@ -223,6 +223,9 @@ input{
 }
 input:hover,input:focus{
     transform: scale(1);
+     transform: translateY(0);
+
+    margin-right: 0;
 }
 
 .btns{
