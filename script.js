@@ -38,13 +38,29 @@ else
 counter();
 display();
 display2();
+
+function border1(){
+        if(arr.length===0){
+        document.querySelector('#table1').style.border='none';
+    }
+}
+function border2(){
+    if(new_arr.length===0){
+        document.querySelector('#table2').style.border='none';
+    }
+  
+}
+
 function counter() {
     let total = arr.length + new_arr.length;
     let completed = new_arr.length;
 
     if (total === 0) {
         discription.textContent = '';
+        document.querySelector('#hr').style.display='none';
+
     } else {
+        document.querySelector('#hr').style.display='block';
         if(completed===1 && total===1){
         discription.textContent = `${completed} task complited from ${total} task`;
  
@@ -112,7 +128,7 @@ else if(Write.value.length>35){
         `      
     }
     document.getElementById('tbody').innerHTML=table;
-
+    border1();
 }
 function updateitem(i){
     Write.value=arr[i];
@@ -176,6 +192,8 @@ counter();
         `      
     }
     document.getElementById('tbody2').innerHTML=table2;
+border2();
+    
 }
   function deleteitem(i){
   arr.splice(i,1);
