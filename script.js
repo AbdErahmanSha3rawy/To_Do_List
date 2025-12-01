@@ -242,22 +242,3 @@ for (let i = 0; i < arr.length; i++) {
 }
     document.getElementById('tbody').innerHTML=table;
 }
-function searchDatacomplited(value){
-
-table2 ='';
-
-    for (let x = 0; x < new_arr.length; x++) {
-        if(new_arr[x].includes(value)){
-        table2 += `        
-            <tr>
-            <td class="text">${new_arr[x]}</td>
-            <td><button onclick = "ok_complited(${x}) " class="ok_complited">⬆</button></td>
-            <td><button onclick = "update_complited(${x}) " class="update_complited">🖊</button></td>
-            <td><button onclick = "deletec(${x}) " class="delete_complited">✖</button></td>
-        </tr> 
-        
-        `      
-    }
-}
-    document.getElementById('tbody2').innerHTML=table2;
-}
